@@ -40,7 +40,7 @@ class Menu extends Component {
                 <div className="row">
                     {menu}
                 </div>
-                <div className="row">
+                <div>
                     <DishDetail dish={this.state.selectedDish}/>
                 </div>
             </div>
