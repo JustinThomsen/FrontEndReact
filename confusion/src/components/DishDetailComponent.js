@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardImgOverlay} from 'reactstrap'
 
+
 class DishDetail extends Component{
     constructor(props) {
         super(props);
@@ -20,10 +21,11 @@ class DishDetail extends Component{
 
     renderComments(dishComments){
         const comments = dishComments.map((comment) => {
+        const dateForFormatting = new Date(comment.date);
             return(
                 <ul key={comment.id} className="list-unstyled">
                     <li>{comment.comment}</li>
-                    <li>-- {comment.author}</li>
+                    <li>-- {comment.author} , {dateForFormatting.toDateString().slice(3, 10)}, {dateForFormatting.toDateString().slice(11)}</li>
                 </ul>
             )
         });
