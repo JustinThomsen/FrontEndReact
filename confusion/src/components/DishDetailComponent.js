@@ -17,8 +17,8 @@ import {
     Row,
     Col
 } from 'reactstrap'
-import {Link} from "react-router-dom";
-import {Control, Errors, LocalForm} from "react-redux-form";
+import { Link } from "react-router-dom";
+import { Control, Errors, LocalForm } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -66,7 +66,9 @@ class CommentForm extends Component {
                                 <Col md={12}>
                                     <Control.select model=".rating" id="rating" name="rating"
                                                     placeholder="Rating"
-                                                    className="form-control">
+                                                    className="form-control"
+                                                    validators={{required,}}
+                                    >
                                         <option>Select Your Rating</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -74,6 +76,11 @@ class CommentForm extends Component {
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                     </Control.select>
+                                    <Errors className="text-danger"
+                                            model=".rating"
+                                            show="touched"
+                                            messages={{required: 'Required'}}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -83,7 +90,7 @@ class CommentForm extends Component {
                                                   placeholder="Your Name"
                                                   className="form-control"
                                                   validators={{
-                                                      required, minLength: minLength(3), maxLength: maxLength(15),
+                                                      minLength: minLength(3), maxLength: maxLength(15),
                                                   }}
                                     />
                                     <Errors
@@ -91,7 +98,6 @@ class CommentForm extends Component {
                                         model=".author"
                                         show="touched"
                                         messages={{
-                                            required: 'Required ',
                                             minLength: 'Must be greater than 2 characters',
                                             maxLength: 'Must be 15 characters or less'
                                         }}
@@ -102,7 +108,7 @@ class CommentForm extends Component {
                                 <Label htmlFor="comment" md={12}>Comment</Label>
                                 <Col md={12}>
                                     <Control.textarea model=".comment" id="comment" name="comment" rows="6"
-                                                  className="form-control"
+                                                      className="form-control"
                                     />
                                 </Col>
                             </Row>
@@ -182,6 +188,5 @@ const DishDetail = (props) => {
         )
     }
 }
-
 
 export default DishDetail;
