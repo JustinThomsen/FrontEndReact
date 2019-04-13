@@ -7,7 +7,7 @@ import Menu from './MenuComponent';
 import DishDetail from './DishDetailComponent';
 import About from './AboutComponent';
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { connect} from "react-redux";
+import { connect } from "react-redux";
 import {DISHES} from "../shared/dishes";
 
 const mapStateToProps = state => {

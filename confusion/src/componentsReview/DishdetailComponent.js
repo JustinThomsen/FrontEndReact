@@ -22,6 +22,7 @@ class Dishdetail extends Component {
                     <ul className="list-unstyled">
                         {listComments}
                     </ul>
+
                 </div>
             );
 
