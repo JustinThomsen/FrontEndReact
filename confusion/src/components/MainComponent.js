@@ -4,11 +4,10 @@ import Home from './HomeComponent'
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Menu from './MenuComponent';
-import DishDetail from './DishDetailComponent';
+import DishDetail from './DishdetailComponent';
 import About from './AboutComponent';
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import {DISHES} from "../shared/dishes";
 
 const mapStateToProps = state => {
     return {
