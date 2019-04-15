@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import { createStore, combineReducers } from "redux";
 import { Dishes } from "./dishes";
 import { Promotions } from "./promotions";
 import { Leaders } from "./leaders";

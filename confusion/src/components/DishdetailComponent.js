@@ -42,9 +42,10 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
         this.toggleModal();
+        alert('Current State is: ' + JSON.stringify(values));
+        console.log(values.rating + values.author);
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -70,11 +71,11 @@ class CommentForm extends Component {
                                                     validators={{required,}}
                                     >
                                         <option>Select Your Rating</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
                                     </Control.select>
                                     <Errors className="text-danger"
                                             model=".rating"
@@ -133,8 +134,7 @@ function RenderDish({dish}){
     )
 }
 
-function RenderComments({comments}){
-    console.log(comments);
+function RenderComments({comments, addComment, dishId}){
     const comment = comments.map((comment) => {
         return(
             <React.Fragment>
@@ -151,7 +151,7 @@ function RenderComments({comments}){
             <React.Fragment>
                 <h4>Comments</h4>
                 <div>{comment}</div>
-                <CommentForm />
+                <CommentForm dishId={dishId} addComment={addComment}/>
             </React.Fragment>
         )
     } else {
@@ -163,7 +163,6 @@ function RenderComments({comments}){
 
 const DishDetail = (props) => {
     if (props.dish != null) {
-        console.log(props.comments);
         return (
             <div className="container">
                 <div className="row">
@@ -177,8 +176,14 @@ const DishDetail = (props) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12 col-md-5 m-1 d-inline-block"><RenderDish dish={props.dish}/></div>
-                    <div className="col-12 col-md-5 m-1 d-inline-block"><RenderComments comments = {props.comments}/></div>
+                    <div className="col-12 col-md-5 m-1 d-inline-block">
+                        <RenderDish dish={props.dish}/>
+                    </div>
+                    <div className="col-12 col-md-5 m-1 d-inline-block">
+                        <RenderComments comments = {props.comments}
+                                        addComment={props.addComment}
+                                        dishId={props.dish.id} />
+                    </div>
                 </div>
             </div>
         )
