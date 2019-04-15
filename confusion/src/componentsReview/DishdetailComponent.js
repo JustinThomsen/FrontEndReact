@@ -100,7 +100,7 @@ function RenderComments({comments}) {
     if (comments == null) {
         return (<div></div>);
     }
-    const cmnts = comments.map(comment => {
+    const commentArray = comments.map(comment => {
         return (
             <li key={comment.id}>
                 <p>{comment.comment}</p>
@@ -119,7 +119,7 @@ function RenderComments({comments}) {
         <div className='col-12 col-md-5 m-1'>
             <h4> Comments </h4>
             <ul className='list-unstyled'>
-                {cmnts}
+                {commentArray}
             </ul>
             <CommentForm />
 
@@ -147,7 +147,7 @@ function RenderDish({dish}) {
 }
 
 const Dishdetail = (props) => {
-    const dish = props.dish
+    const dish = props.dish;
     if (dish == null) {
         return (<div></div>)
     }
