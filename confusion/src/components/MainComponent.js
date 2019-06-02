@@ -8,7 +8,7 @@ import DishDetail from './DishdetailComponent';
 import About from './AboutComponent';
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { postComment, fetchDishes, fetchPromos, fetchComments, postFeedback } from "../redux/ActionCreators";
+import { postComment, fetchLeaders, fetchDishes, fetchPromos, fetchComments, postFeedback } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
     postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
     postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
     fetchDishes: () => {dispatch(fetchDishes())},
+    fetchLeaders: () => {dispatch(fetchLeaders())},
     resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
     fetchPromos: () => {dispatch(fetchPromos())},
     fetchComments: () => {dispatch(fetchComments())},
@@ -40,6 +41,7 @@ class Main extends Component {
         this.props.fetchDishes();
         this.props.fetchComments();
         this.props.fetchPromos();
+        this.props.fetchLeaders();
     }
 
 
@@ -52,7 +54,9 @@ class Main extends Component {
                       promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
                       promosLoading={this.props.promotions.isLoading}
                       promosErrMess={this.props.promotions.errMess}
-                      leader={this.props.leaders.filter((lead) => lead.featured)[0]}
+                      leader={this.props.leaders.leaders.filter((lead) => lead.featured)[0]}
+                      leadersLoading={this.props.leaders.isLoading}
+                      leadersErrMess={this.props.leaders.errMess}
                 />
             )
         };
