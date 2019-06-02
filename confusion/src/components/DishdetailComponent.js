@@ -58,7 +58,7 @@ class CommentForm extends Component {
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <Button outline onClick={this.toggleModal}>
-                            <span className="fa fa-pencil fa-lg"></span> Submit Comment
+                            <span className="fa fa-pencil fa-lg"/> Submit Comment
                         </Button>
                     </NavItem>
                 </Nav>
@@ -133,7 +133,7 @@ function RenderDish({dish}){
                exitTransform: 'scale(0.5) translateY(-50%)'
            }}>
             <Card>
-                <CardImg width="100%" src={ baseUrl + dish.image } alt={dish.name}></CardImg>
+                <CardImg width="100%" src={ baseUrl + dish.image } alt={dish.name}/>
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>

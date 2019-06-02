@@ -7,6 +7,50 @@ export const addComment = (comment) => ({
     payload: comment
 });
 
+export const addFeedback = (feedback) => ({
+    type: ActionTypes.ADD_FEEDBACK,
+    payload: feedback
+});
+
+export const postFeedback = (firstName, lastName, telNum, email, agree, contactType, message) => (dispatch) => {
+    const newFeedback = {
+        firstName: firstName,
+        lastName: lastName,
+        telNum: telNum,
+        email: email,
+        agree: agree,
+        contactType: contactType,
+        message: message
+    };
+    newFeedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback', {
+        method: 'POST',
+        body: JSON.stringify(newFeedback),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(response => dispatch(addFeedback(response)))
+        .catch(error => { console.log('Post feedback ', error.message);
+            alert('Your feedback could not be posted\nError: ' + error.message);
+        })
+};
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     const newComment = {
         dishId: dishId,
@@ -42,7 +86,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
         .catch(error => { console.log('Post comments ', error.message);
             alert('Your comment could not be posted\nError: ' + error.message);
         })
-}
+};
 
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
