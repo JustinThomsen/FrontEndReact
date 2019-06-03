@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import Link from "react-router-dom/es/Link";
 import {Loading} from "./LoadingComponent";
 import { baseUrl} from "../shared/baseUrl";
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderLeader({leader}) {
     return(
@@ -23,7 +24,9 @@ function RenderLeader({leader}) {
 function About(props) {
     const leaders = props.leaders.leaders.map((leader) => {
         return (
-            <RenderLeader key={leader.id} leader={leader}/>
+            <Fade in>
+                <RenderLeader key={leader.id} leader={leader}/>
+            </Fade>
         )
     });
     if (props.leaders.isLoading){
@@ -100,7 +103,9 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                        <Stagger in>
+                            {leaders}
+                        </Stagger>
                     </Media>
                 </div>
             </div>

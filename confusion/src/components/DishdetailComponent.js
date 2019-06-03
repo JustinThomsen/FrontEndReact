@@ -144,36 +144,33 @@ function RenderDish({dish}){
 }
 
 function RenderComments({comments, postComment, dishId}){
-    const comment = comments.map((comment) => {
-        return(
-                    <React.Fragment>
-                <Fade in>
 
-                        <ul key={comment.id} className="list-unstyled">
-
-                            <li>{comment.comment}</li>
-                            <li>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
-                        </ul>
-                </Fade>
-                    </React.Fragment>
-        );
-    });
-
-    if (comment != null) {
         return (
             <React.Fragment>
                 <h4>Comments</h4>
                 <Stagger in>
-                    <div>{comment}</div>
+
+                    {comments.map((comment) => {
+                        return (
+                            <Fade in>
+
+                                <ul key={comment.id} className="list-unstyled">
+
+                                    <li>{comment.comment}</li>
+                                    <li>-- {comment.author} , {new Intl.DateTimeFormat('en-US', {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: '2-digit'
+                                    }).format(new Date(Date.parse(comment.date)))}</li>
+                                </ul>
+                            </Fade>
+                        );
+                    })}
                 </Stagger>
                 <CommentForm dishId={dishId} postComment={postComment}/>
             </React.Fragment>
         )
-    } else {
-        return(
-            <div></div>
-        )
-    }
+
 }
 
 const DishDetail = (props) => {
